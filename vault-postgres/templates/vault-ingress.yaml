@@ -6,7 +6,7 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: {{ index .Values.vault.ingress.hosts 0 | quote }}
+    - host: vault.cloudmasa.app
       http:
         paths:
           - path: /
@@ -15,4 +15,4 @@ spec:
               service:
                 name: vault-service
                 port:
-                  number: {{ .Values.vault.service.port }}
+                  number: 8200
