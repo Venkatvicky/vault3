@@ -2,12 +2,14 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: postgres-pv
+  labels:
+    app: postgres
 spec:
   capacity:
-    storage: {{ .Values.postgres.persistence.size }}
+    storage: 10Gi  # Adjust size as needed
   accessModes:
-    - {{ .Values.postgres.persistence.accessMode }}
+    - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: {{ .Values.postgres.persistence.storageClass }}
+  storageClassName: manual
   hostPath:
-    path: "/mnt/data/postgres"
+    path: "/mnt/data/postgres"  # Change path for local testing (use dynamic provisioning in cloud)
