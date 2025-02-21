@@ -6,10 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - host: {{ .Values.vault.ingress.hosts[0].host | quote }}
+    - host: {{ index .Values.vault.ingress.hosts 0 | quote }}
       http:
         paths:
-          - path: {{ .Values.vault.ingress.hosts[0].path }}
+          - path: /
             pathType: Prefix
             backend:
               service:
