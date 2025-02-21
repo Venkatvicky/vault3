@@ -25,6 +25,12 @@ vault:
     accessMode: ReadWriteOnce
     size: 5Gi
 
+  extraEnvironmentVars:
+    VAULT_STORAGE_POSTGRESQL_CONNECTION_URL: "postgres://vault:vaultpassword@postgres-service:5432/vault?sslmode=disable"
+
+  dataStorage:
+    enabled: false
+
 postgres:
   enabled: true
   image: "postgres:14"
