@@ -1,0 +1,18 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vault-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: {{ .Values.vault.ingress.hosts[0].host | quote }}
+      http:
+        paths:
+          - path: {{ .Values.vault.ingress.hosts[0].path }}
+            pathType: Prefix
+            backend:
+              service:
+                name: vault-service
+                port:
+                  number: {{ .Values.vault.service.port }}

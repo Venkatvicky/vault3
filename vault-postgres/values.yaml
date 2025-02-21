@@ -1,0 +1,44 @@
+vault:
+  replicaCount: 1
+  image: "hashicorp/vault:1.15.0"
+
+  serviceAccount:
+    create: true
+    name: "vault-sa"
+
+  service:
+    type: ClusterIP
+    port: 8200
+
+  ingress:
+    enabled: true
+    className: "nginx"
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /
+    hosts:
+      - host: "vault.cloudmasa.app"
+        path: /
+    tls: []
+
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessMode: ReadWriteOnce
+    size: 5Gi
+
+postgres:
+  enabled: true
+  image: "postgres:14"
+  auth:
+    username: "vaultuser"
+    password: "vaultpassword"
+    database: "vault"
+
+  service:
+    port: 5432
+
+  persistence:
+    enabled: true
+    storageClass: "gp2"
+    accessMode: ReadWriteOnce
+    size: 5Gi
