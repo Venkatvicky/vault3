@@ -44,6 +44,8 @@ postgres:
 
   persistence:
     enabled: true
-    storageClass: "gp2"
+    storageClass: "manual"
+    pvName: postgres-pv
     accessMode: ReadWriteOnce
-    size: 5Gi
+    size: 10Gi
+    hostPath: "/mnt/data/postgres"
