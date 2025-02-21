@@ -16,8 +16,7 @@ vault:
     annotations:
       nginx.ingress.kubernetes.io/rewrite-target: /
     hosts:
-      - host: "vault.cloudmasa.app"
-        path: /
+      - "vault.cloudmasa.app"
     tls: []
 
   persistence:
